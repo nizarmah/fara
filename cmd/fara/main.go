@@ -20,7 +20,7 @@ const debug = false
 
 const (
 	cursorRate  = 120 // Hz
-	cursorSpeed = 1   // px
+	cursorSpeed = 3   // px
 )
 
 var (
