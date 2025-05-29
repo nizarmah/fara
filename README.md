@@ -4,7 +4,7 @@ Fara is a tool to control the mouse with gestures.
 
 I woke up with a dead trackpad, and built it instead of buying a new one.
 
-<div style="position: relative; padding-bottom: 62.5%; height: 0;"><iframe src="https://www.loom.com/embed/3ed951f331c74d4e9c1a15dd5662e2e8?sid=82ff1a41-7cd4-40e6-8bd6-9b43ade3e88a" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+https://github.com/user-attachments/assets/91b549fe-7995-455b-a786-4f5a230d4c78
 
 ## Quick Start
 
@@ -13,3 +13,20 @@ Install [`pyenv`](https://github.com/pyenv/pyenv?tab=readme-ov-file#installation
 ```bash
 make run
 ```
+
+## Controls
+
+1. Left Click: pinch (thumb + index/middle finger)
+2. Right ClicK: pinch (thumb + pinky)
+3. Drag: pinch and hold
+4. Scroll: fist and pull up/down
+
+## Disclaimer
+
+This is still extremely early days.
+The current proof of concept was written by AI.
+
+I needed something extremely quickly, because well I had no mouse.
+I'll make it better, slowly, because I'm using this personally.
+
+Heads up, this might not stay in Python. It might get re-written in Go.
