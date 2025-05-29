@@ -15,7 +15,7 @@ import (
 )
 
 var (
-	quitKey = []string{"q", "ctrl", "shift"}
+	quitHotkey = []string{"ctrl", "shift", "q"}
 )
 
 func main() {
@@ -45,7 +45,7 @@ func main() {
 	log.Println(
 		fmt.Sprintf(
 			"Press %q to quit.",
-			strings.Join(quitKey, "+"),
+			strings.Join(quitHotkey, "+"),
 		),
 	)
 
@@ -60,8 +60,8 @@ func registerKeyEvents(
 	cancel context.CancelCauseFunc,
 ) {
 	// Add a hook to quit the program.
-	hook.Register(hook.KeyDown, quitKey, func(_ hook.Event) {
-		cancel(errors.New("quit key pressed"))
+	hook.Register(hook.KeyDown, quitHotkey, func(_ hook.Event) {
+		cancel(errors.New("quit hotkey pressed"))
 	})
 
 	// Todo: Add other key events here.
