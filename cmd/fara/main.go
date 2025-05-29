@@ -36,6 +36,10 @@ var (
 	rightKey = []string{"d"}
 )
 
+var (
+	leftClickKey = []string{"space"}
+)
+
 func main() {
 	// Context.
 	ctx, cancel := context.WithCancelCause(context.Background())
@@ -109,6 +113,9 @@ func registerKeyEvents(
 	// Add a hook to move the cursor right.
 	hook.Register(hook.KeyDown, rightKey, handleCursorHold(cursor, cursorPkg.DirectionRight, true))
 	hook.Register(hook.KeyUp, rightKey, handleCursorHold(cursor, cursorPkg.DirectionRight, false))
+
+	// Add a hook to left click.
+	hook.Register(hook.KeyDown, leftClickKey, handleCursorClick(cursor, "left"))
 }
 
 // handleQuit handles a quit event.
@@ -144,5 +151,15 @@ func handleCursorHold(
 ) func(hook.Event) {
 	return func(_ hook.Event) {
 		cursor.Hold(direction, hold)
+	}
+}
+
+// handleCursorClick handles a cursor click event.
+func handleCursorClick(
+	cursor *cursorPkg.Client,
+	button string,
+) func(hook.Event) {
+	return func(_ hook.Event) {
+		cursor.Click(button)
 	}
 }

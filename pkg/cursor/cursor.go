@@ -103,6 +103,15 @@ func (c *Client) Hold(dir Direction, state bool) {
 	}
 }
 
+// Click clicks the cursor.
+func (c *Client) Click(button string) {
+	if !c.active.Load() {
+		return
+	}
+
+	robotgo.Click(button)
+}
+
 // Reset resets the cursor to the center of the screen.
 func (c *Client) Reset() {
 	if !c.active.Load() {
