@@ -1,12 +1,12 @@
 # fara
 
-Fara is a tool to control the mouse with your keyboard.
+Fara is a tool to control the mouse with gestures.
 
 I woke up with a dead trackpad, and built it instead of buying a new one.
 
 ## Quick Start
 
-Install [Go](https://go.dev/doc/install) if you haven't.
+Install [`pyenv`](https://github.com/pyenv/pyenv?tab=readme-ov-file#installation) if you haven't already.
 
 ```bash
 make run

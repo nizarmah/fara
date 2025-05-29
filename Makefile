@@ -1,8 +1,16 @@
-.PHONY: build run
+VENV = .venv
+PY   = $(VENV)/bin/python
+PIP  = $(VENV)/bin/pip
 
-build:
-	go mod download
-	go build -o fara cmd/fara/main.go
+.PHONY: run setup clean
 
-run: build
-	./fara
+setup:
+	pyenv exec python3 -m venv $(VENV)
+	$(PIP) install -U pip
+	$(PIP) install -r requirements.txt
+
+run:
+	$(PY) main.py
+
+clean:
+	rm -rf $(VENV)
