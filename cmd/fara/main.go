@@ -21,14 +21,12 @@ var (
 func main() {
 	// Context.
 	ctx, cancel := context.WithCancelCause(context.Background())
-	defer cancel(errors.New("program ended"))
+	defer cancel(errors.New("shutdown"))
 
 	// Handle OS signals.
 	signalChan := make(chan os.Signal, 1)
 	signal.Notify(signalChan, syscall.SIGINT, syscall.SIGTERM, syscall.SIGKILL)
-	go func() {
-		cancel(fmt.Errorf("received signal: %v", <-signalChan))
-	}()
+	go func() { cancel(fmt.Errorf("signal: %v", <-signalChan)) }()
 
 	// Register key events.
 	registerKeyEvents(ctx, cancel)
@@ -36,11 +34,8 @@ func main() {
 	// Start the hook.
 	events := hook.Start()
 	defer hook.End()
-
-	// Process only registered events.
 	go hook.Process(events)
 
-	// Print the quit key.
 	log.Println("Fara is running...")
 	log.Println(
 		fmt.Sprintf(
@@ -51,7 +46,9 @@ func main() {
 
 	// Wait for the context to be done.
 	<-ctx.Done()
-	log.Printf("Fara is quitting: %v", context.Cause(ctx))
+
+	log.Println("Fara is quitting...")
+	log.Println(fmt.Sprintf("Reason: %v", context.Cause(ctx)))
 }
 
 // registerKeyEvents registers key events.
@@ -61,7 +58,7 @@ func registerKeyEvents(
 ) {
 	// Add a hook to quit the program.
 	hook.Register(hook.KeyDown, quitHotkey, func(_ hook.Event) {
-		cancel(errors.New("quit hotkey pressed"))
+		cancel(errors.New("quit hotkey"))
 	})
 
 	// Todo: Add other key events here.
