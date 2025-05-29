@@ -219,12 +219,28 @@ class HandCursor:
 
                 # ---- gestures ----------------------------------------------
                 fist = self._is_fist(lm)
-                action = self._handle_pinch(self._is_pinch(lm))
-                if not action:
+
+                # Priority 1: If fist, only allow scroll
+                if fist:
                     action = self._handle_scroll(lm[0].y, fist)
-                if not action and self._is_thumb_pinky(lm):
-                    pyautogui.rightClick()
-                    action = "right-click"
+                    # Ensure pinch state is reset when in fist mode
+                    if self._pinch_state:
+                        if self._dragging:
+                            pyautogui.mouseUp()
+                        self._pinch_state = False
+                        self._dragging = False
+                        self._pinch_frames = 0
+                else:
+                    # Priority 2: If not fist, check for pinch
+                    is_pinching = self._is_pinch(lm)
+                    if is_pinching or self._pinch_state:
+                        # Handle pinch - this takes priority over thumb-pinky
+                        action = self._handle_pinch(is_pinching)
+                    else:
+                        # Priority 3: Only check thumb-pinky if not pinching
+                        if self._is_thumb_pinky(lm):
+                            pyautogui.rightClick()
+                            action = "right-click"
 
             # ---- FPS ------------------------------------------------------
             fps_counter += 1
