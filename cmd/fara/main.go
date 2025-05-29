@@ -37,7 +37,7 @@ var (
 )
 
 var (
-	leftClickKey = []string{"space"}
+	leftClickKey = []string{"j"}
 )
 
 func main() {
