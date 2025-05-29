@@ -16,11 +16,11 @@ import (
 	cursorPkg "github.com/nizarmah/fara/pkg/cursor"
 )
 
-const debug = true
+const debug = false
 
 const (
-	cursorRate  = 60 // Hz
-	cursorSpeed = 8  // px
+	cursorRate  = 120 // Hz
+	cursorSpeed = 1   // px
 )
 
 var (
@@ -69,12 +69,24 @@ func main() {
 	go hook.Process(events)
 
 	log.Println("Fara is running...")
-	log.Println(
-		fmt.Sprintf(
-			"Press %q to quit.",
-			strings.Join(quitHotkey, "+"),
-		),
-	)
+	log.Println()
+
+	log.Println("Hotkeys:")
+	log.Println(fmt.Sprintf("\t%s to activate and deactivate the cursor", strings.Join(faraHotkey, "+")))
+	log.Println(fmt.Sprintf("\t%s to reset the cursor back to the center", strings.Join(resetHotkey, "+")))
+	log.Println(fmt.Sprintf("\t%s to quit", strings.Join(quitHotkey, "+")))
+	log.Println()
+
+	log.Println("Movement:")
+	log.Println(fmt.Sprintf("\t%s to move the cursor up", strings.Join(upKey, "+")))
+	log.Println(fmt.Sprintf("\t%s to move the cursor down", strings.Join(downKey, "+")))
+	log.Println(fmt.Sprintf("\t%s to move the cursor left", strings.Join(leftKey, "+")))
+	log.Println(fmt.Sprintf("\t%s to move the cursor right", strings.Join(rightKey, "+")))
+	log.Println()
+
+	log.Println("Clicking:")
+	log.Println(fmt.Sprintf("\t%s to left click", strings.Join(leftClickKey, "+")))
+	log.Println()
 
 	// Wait for the context to be done.
 	<-ctx.Done()
