@@ -135,10 +135,6 @@ func handleCursorToggle(cursor *cursorPkg.Client) func(hook.Event) {
 // handleCursorReset handles a cursor reset event.
 func handleCursorReset(cursor *cursorPkg.Client) func(hook.Event) {
 	return func(_ hook.Event) {
-		if !cursor.IsActive() {
-			return
-		}
-
 		cursor.Reset()
 	}
 }
